@@ -1,16 +1,14 @@
-# Use the official OpenJDK 17 image from the Docker Hub as a base image
-FROM openjdk:17-jdk-slim
+## Use a base image for Java
+FROM openjdk:17-jdk-alpine
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the packaged Spring Boot JAR file into the container
-# Assuming the JAR file is built and located in the target/ directory
-COPY target/my-spring-boot-app-1.0.0.jar /app/my-spring-boot-app.jar
+# Copy the compiled JAR file from the build context into the container
+COPY target/my-springboot-app.jar /app/my-springboot-app.jar
 
+# Expose the application port (optional, defaults to 8080 for Spring Boot)
+EXPOSE 8082
 
-# Expose the port on which the application will run (default 8081 for Spring Boot)
-EXPOSE 8081
-
-# Run the Spring Boot application JAR when the container starts
-ENTRYPOINT ["java", "-jar", "/app/my-spring-boot-app.jar"]
+# Command to run the app when the container starts
+ENTRYPOINT ["java", "-jar", "my-springboot-app.jar"]
