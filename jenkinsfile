@@ -50,15 +50,16 @@ pipeline {
                 sh "docker-compose build -t my-spring-boot-app:${params.TAG} ."
             }
         }
-
         stage('Deploy with Docker Compose') {
             steps {
-                echo "Deploying Docker container using Docker Compose with tag: ${params.TAG}"
-                // Start the service using Docker Compose
-                sh 'docker-compose up -d'
+                echo 'Deploying Docker container using Docker Compose with tag: latest'
+                dir('docker') {  // Assuming your docker-compose.yml is in the 'docker' subdirectory
+                    sh 'docker-compose up -d'
+                }
             }
         }
     }
+       
 
     post {
         always {
