@@ -51,13 +51,12 @@ pipeline {
             }
         }
         stage('Deploy with Docker Compose') {
-           steps {
+    steps {
         echo 'Deploying Docker container using Docker Compose with tag: latest'
-        sh 'docker-compose -f docker-compose.yml up -d'
+        sh 'docker-compose -f docker/docker-compose.yml up -d'
     }
 }
 }
-
        
 
     post {
