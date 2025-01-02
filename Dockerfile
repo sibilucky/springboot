@@ -6,7 +6,7 @@ WORKDIR /app
 # Copy the JAR file from the target directory into the container
 COPY target/springboot-0.0.1-SNAPSHOT.jar /app/my-springboot-app.jar
 
-# Expose the application port (optional, defaults to 8080 for Spring Boot)
+# Expose the application port (optional, defaults to 8082 for Spring Boot)
 EXPOSE 8082
 
 # Run the Spring Boot application
