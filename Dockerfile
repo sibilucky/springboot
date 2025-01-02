@@ -1,16 +1,14 @@
-## Use a base image for Java
 FROM openjdk:17-jdk-alpine
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the compiled JAR file from the build context into the container
+# Copy the JAR file from the target directory into the container
 COPY target/springboot-0.0.1-SNAPSHOT.jar /app/my-springboot-app.jar
-
-
 
 # Expose the application port (optional, defaults to 8080 for Spring Boot)
 EXPOSE 8082
 
-# Command to run the app when the container starts
-ENTRYPOINT ["java", "-jar", "my-springboot-app.jar"]
+# Run the Spring Boot application
+ENTRYPOINT ["java", "-jar", "/app/my-springboot-app.jar"]
+ 
