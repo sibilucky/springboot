@@ -4,7 +4,7 @@ services:
   springboot-app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: my-spring-boot-app:latest
     ports:
       - "8082:8082"
     environment:
