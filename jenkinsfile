@@ -2,21 +2,23 @@ pipeline {
     agent any  // Runs on any available agent
 
     parameters {
-        choice(name: 'REPOSITORY', choices: ['https://github.com/sibilucky/my-spring-boot-app.git'], description: 'Select the Git repository URL')
+        choice(name: 'REPOSITORY', choices: ['https://github.com/sibilucky/springboot.git'], description: 'Select the Git repository URL')
         choice(name: 'BRANCH', choices: ['main', 'master', 'release'], description: 'Select the Git branch to checkout')
         choice(name: 'TAG', choices: ['latest', 'v1.0', 'v2.0'], description: 'Select the Docker image tag')
     }
 
     environment {
-        // Define environment variables here if needed
+        REPO_URL = "https://github.com/sibilucky/springboot.git"
+        BRANCH_NAME = "main"
+        IMAGE_TAG = "latest" 
     }
 
     stages {
         stage('Checkout') {
             steps {
                 script {
-                    echo "Checking out code from repository: ${params.REPOSITORY}, branch: ${params.BRANCH}"
-                    git url: params.REPOSITORY, branch: params.BRANCH
+                    echo "Checking out code from repository:https://github.com/sibilucky/springboot.git , branch: main"
+                    git url: 'https://github.com/sibilucky/springboot.git', branch: 'main'
                 }
             }
         }
@@ -24,7 +26,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the project using Maven'
-                sh 'mvn clean install -DskipTests'
+                sh 'mvn clean install '
             }
         }
 
