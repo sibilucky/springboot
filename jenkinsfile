@@ -58,9 +58,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo "Deploying Docker container with tag: ${params.TAG}"
-                
+                sh """
+                     #!/bin/bash
                     docker build -t my-spring-boot-app:latest .
                     docker run -d -p 8082:8082 my-spring-boot-app:latest
+                    """
+
                
             }
         }
