@@ -5,7 +5,8 @@ FROM openjdk:17-jdk-alpine
 WORKDIR /app
 
 # Copy the compiled JAR file from the build context into the container
-COPY target/my-springboot-app.jar /app/my-springboot-app.jar
+COPY target/springboot-0.0.1-SNAPSHOT.jar /app/my-springboot-app.jar
+
 
 # Expose the application port (optional, defaults to 8080 for Spring Boot)
 EXPOSE 8082
