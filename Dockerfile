@@ -8,6 +8,7 @@ WORKDIR /app
 COPY target/springboot-0.0.1-SNAPSHOT.jar /app/my-springboot-app.jar
 
 
+
 # Expose the application port (optional, defaults to 8080 for Spring Boot)
 EXPOSE 8082
 
