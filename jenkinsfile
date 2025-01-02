@@ -1,0 +1,73 @@
+pipeline {
+    agent any  // Runs on any available agent
+
+    parameters {
+        choice(name: 'REPOSITORY', choices: ['https://github.com/sibilucky/my-spring-boot-app.git'], description: 'Select the Git repository URL')
+        choice(name: 'BRANCH', choices: ['main', 'master', 'release'], description: 'Select the Git branch to checkout')
+        choice(name: 'TAG', choices: ['latest', 'v1.0', 'v2.0'], description: 'Select the Docker image tag')
+    }
+
+    environment {
+        // Define environment variables here if needed
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    echo "Checking out code from repository: ${params.REPOSITORY}, branch: ${params.BRANCH}"
+                    git url: params.REPOSITORY, branch: params.BRANCH
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building the project using Maven'
+                sh 'mvn clean install -DskipTests'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running unit tests'
+                sh 'mvn test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                echo 'Packaging the Spring Boot application into a JAR...'
+                sh 'mvn package'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                echo "Building Docker image with tag: ${params.TAG}"
+                sh "docker-compose build -t my-spring-boot-app:${params.TAG} ."
+            }
+        }
+
+        stage('Deploy with Docker Compose') {
+            steps {
+                echo "Deploying Docker container using Docker Compose with tag: ${params.TAG}"
+                // Start the service using Docker Compose
+                sh 'docker-compose up -d'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Cleaning up'
+            cleanWs() // Clean up the workspace after execution
+        }
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
