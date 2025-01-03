@@ -10,8 +10,8 @@
 
     <properties>
         <java.version>11</java.version>
-        <!-- Add Spring Boot version here -->
-        <spring.boot.version>2.5.0</spring.boot.version> <!-- Use the appropriate Spring Boot version -->
+        <!-- Use a more recent Spring Boot version for better stability and features -->
+        <spring.boot.version>2.5.4</spring.boot.version> <!-- Updated Spring Boot version -->
     </properties>
 
     <dependencies>
@@ -29,7 +29,14 @@
             <version>${spring.boot.version}</version>
         </dependency>
 
-        <!-- Add more dependencies as needed -->
+        <!-- Additional dependencies can go here -->
+        <!-- Example: Spring Boot Starter Test for unit testing -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -37,9 +44,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.5.0</version> <!-- Ensure plugin version is correct -->
+                <version>${spring.boot.version}</version> <!-- Match plugin version with Spring Boot -->
                 <configuration>
-                    <mainClass>com.example.MyApplication</mainClass>
+                    <mainClass>com.example.MyApplication</mainClass> <!-- Ensure this is your main class -->
                 </configuration>
             </plugin>
         </plugins>
