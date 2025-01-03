@@ -29,11 +29,11 @@
             <version>${spring.boot.version}</version>
         </dependency>
 
-        <!-- Additional dependencies can go here -->
-        <!-- Example: Spring Boot Starter Test for unit testing -->
+        <!-- Spring Boot Starter Test dependency -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.boot.version}</version> <!-- Added version -->
             <scope>test</scope>
         </dependency>
 
