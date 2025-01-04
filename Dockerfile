@@ -1,10 +1,5 @@
- FROM openjdk:17-jdk-slim
+FROM openjdk:17-jdk-slim
+COPY target/springboot.jar /app/springboot.jar
 WORKDIR /app
-
-# Update this line to match the actual filename in the target directory
-COPY target/my-springboot-app-1.0.0.jar /app/springboot.jar
-
-EXPOSE 8082
-CMD ["java", "-jar", "springboot.jar"]
-
+ENTRYPOINT ["java", "-jar", "springboot.jar"]
 
